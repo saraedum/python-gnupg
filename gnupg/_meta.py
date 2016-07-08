@@ -175,10 +175,14 @@ class GPGBase(object):
         self.ignore_homedir_permissions = ignore_homedir_permissions
         self.binary  = _util._find_binary(binary)
         self.homedir = os.path.expanduser(home) if home else _util._conf
-        pub = _parsers._fix_unsafe(keyring) if keyring else 'pubring.gpg'
-        sec = _parsers._fix_unsafe(secring) if secring else 'secring.gpg'
-        self.keyring = os.path.join(self._homedir, pub)
-        self.secring = os.path.join(self._homedir, sec)
+        self.keyring = None
+        if keyring:
+            pub = _parsers._fix_unsafe(keyring)
+            self.keyring = os.path.join(self._homedir, pub)
+        self.secring = None
+        if secring:
+            sec = _parsers._fix_unsafe(secring)
+            self.secring = os.path.join(self._homedir, sec)
         self.options = list(_parsers._sanitise_list(options)) if options else None
 
         #: The version string of our GnuPG binary

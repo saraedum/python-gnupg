@@ -85,13 +85,10 @@ class GPG(GPGBase):
                         to ``--debug-level basic.``
 
         :param str keyring: Name of keyring file containing public key data.
-                            If unspecified, defaults to :file:`pubring.gpg` in
-                            the **homedir** directory.
+                            If unspecified, uses whatever GnuPG defaults to.
 
-        :param str secring: Name of alternative secret keyring file to use. If
-                            left unspecified, this will default to using
-                            :file:`secring.gpg` in the **homedir** directory,
-                            and create that file if it does not exist.
+        :param str secring: Name of alternative secret keyring file to use.
+                            If unspecified, uses whatever GnuPG defaults to.
 
         :param list options: A list of additional options to pass to the GnuPG
                              binary.
